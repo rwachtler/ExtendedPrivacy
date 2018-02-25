@@ -19,7 +19,7 @@
         var self = this;
 
         this.searchUserByID = function () {
-            piwikApi.get({ module: 'API', methode: 'ExtendedPrivacy.searchUserByID' }, {
+            piwikApi.get({ module: 'API', method: 'ExtendedPrivacy.searchUserByID' }, {
                 id: this.id
             }).then(function (success) {
                 var UI = require('piwik/UI');
