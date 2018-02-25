@@ -32,6 +32,18 @@
 <div piwik-content-block
      id="anonymizationAnchor"
      content-title="{{ 'ExtendedPrivacy_Anonymization'|translate|e('html_attr') }}">
+     {% if anonymizeIPInUse %}
+        <strong>{{ 'ExtendedPrivacy_IPAnonymizationInUse'|translate }}</strong>
+        <br/>
+        <strong>Anzahl der maskierten Stellen: </strong>{{ anonymizeIPMaskLength }} (Bsp. <i>{{ anonymizeIPExamplePreview }}</i>)
+        <br/>
+        <strong>Geolokalisierung verwendet anonymisierte IP-Adresse: </strong>
+        {% if anonymizeIPForAnonymousVisitEnrichment == 0 %}
+            {{ 'General_No'|translate }}
+        {% else %}
+            {{ 'General_Yes'|translate }}
+        {% endif %}
+     {% endif %}
 </div>
 <div piwik-content-block
      id="dataAlterDeletionAnchor"

@@ -9,6 +9,9 @@
 namespace Piwik\Plugins\ExtendedPrivacy;
 
 use Piwik\Common;
+use Piwik\Config as PiwikConfig;
+use Piwik\Plugins\PrivacyManager\Config;
+use Piwik\Plugins\PrivacyManager\IPAnonymizer;
 use Piwik\Plugins\LanguagesManager\LanguagesManager;
 use Piwik\Piwik;
 use Piwik\Site;
@@ -28,9 +31,14 @@ class Controller extends \Piwik\Plugin\Controller
         Piwik::checkUserHasSomeAdminAccess();
         if (Piwik::hasUserSuperUserAccess()) {
             $trackingInfo = $this->getTrackingInfoIframe();
+            $anonymizeIPInfo = $this->getAnonymizeIPInfo();
             $viewData = array(
                 'transparencyType' => isset($trackingInfo['type']) ? $trackingInfo['type'] : '',
-                'transparencyIframeContent' => isset($trackingInfo['content']) ? $trackingInfo['content'] : ''
+                'transparencyIframeContent' => isset($trackingInfo['content']) ? $trackingInfo['content'] : '',
+                'anonymizeIPInUse' => $anonymizeIPInfo['enabled'],
+                'anonymizeIPMaskLength' => $anonymizeIPInfo['maskLength'],
+                'anonymizeIPForAnonymousVisitEnrichment' => $anonymizeIPInfo['useAnonymizedIpForVisitEnrichment'],
+                'anonymizeIPExamplePreview' => $anonymizeIPInfo['example']
             );
         }
         return $this->renderTemplate('index', $viewData);
@@ -80,5 +88,27 @@ class Controller extends \Piwik\Plugin\Controller
             }
         }
         return array();
+    }
+
+    protected function getAnonymizeIPInfo()
+    {
+        Piwik::checkUserHasSuperUserAccess();
+        $anonymizeIP = array();
+        $demoIP = '203.0.113.195';
+
+        $privacyConfig = new Config();
+        $anonymizeIP["enabled"] = IPAnonymizer::isActive();
+        $anonymizeIP["maskLength"] = $privacyConfig->ipAddressMaskLength;
+        $anonymizeIP["useAnonymizedIpForVisitEnrichment"] = $privacyConfig->useAnonymizedIpForVisitEnrichment;
+        if (!$anonymizeIP["useAnonymizedIpForVisitEnrichment"]) {
+            $anonymizeIP["useAnonymizedIpForVisitEnrichment"] = '0';
+        }
+        $splittedIP = explode('.', $demoIP);
+        for ($i = $privacyConfig->ipAddressMaskLength; $i > 0; $i--) {
+            $splittedIP[count($splittedIP)-$i] = 'x';
+        }
+        $anonymizeIP["example"] = implode('.', $splittedIP);
+
+        return $anonymizeIP;
     }
 }
