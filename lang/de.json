@@ -8,6 +8,8 @@
         "IPAnonymizationInUse": "IP-Adresse von Besuchern wird anonymisiert!",
         "MenuExtendedPrivacySettings": "Erweiterte Privatsphäre",
         "NoIframeFound": "Es wurde keine Tracking-Erklärung lokalisiert!",
+        "SearchForVisitorID": "Suche nach einer Matomo-Besucherprofil-ID",
+        "SearchForVisitorIDInlineHelp": "Die Matomo-Besucherprofil-ID ist eine (16-Stellige) Identifikation des Besuchers innerhalb von Matomo, diese wird üblicherweise innerhalb eines Cookies (_pk_id_) gesetzt",
         "Teaser": "Auf dieser Seite können Sie Ihre Matomo Privatsphäreeinstellungen analysieren. Sie können zwischen den Kategorien %1$sTransparenz%2$s, %3$sAnonymisierung%4$s und %5$sDatenänderung / Löschung%6$s auswählen.",
         "TeaserHeadline": "Erweiterte Privatsphäreeinstellungen",
         "Transparency": "Transparenz",

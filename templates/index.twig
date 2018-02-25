@@ -49,12 +49,12 @@
      id="dataAlterDeletionAnchor"
      content-title="{{ 'ExtendedPrivacy_DataAlterDelete'|translate|e('html_attr') }}">
      <div piwik-form ng-controller="AlterDeleteController as AlterDeleteCtrl">
-        <div piwik-field uicontrol="text" name="piwikAlterDeleteUserId"
+        <div piwik-field uicontrol="text" name="piwikAlterDeleteVisitorID"
              ng-model="AlterDeleteCtrl.id"
-             title="{{ 'ExtendedPrivacy_SearchForUserID'|translate }}"
+             title="{{ 'ExtendedPrivacy_SearchForVisitorID'|translate }}"
              value=""
              piwik-onenter="AlterDeleteCtrl.searchVisitorByID()"
-             inline-help="{{ 'ExtendedPrivacy_SearchForUserIDInlineHelp'|translate }}">
+             inline-help="{{ 'ExtendedPrivacy_SearchForVisitorIDInlineHelp'|translate }}">
         </div>
         <div piwik-save-button onconfirm=""></div>
      </div>
