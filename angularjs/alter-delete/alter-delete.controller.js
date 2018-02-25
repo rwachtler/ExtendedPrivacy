@@ -18,9 +18,10 @@
         // remember to keep controller very simple. Create a service/factory (model) if needed
         var self = this;
 
-        this.searchUserByID = function () {
-            piwikApi.get({ module: 'API', method: 'ExtendedPrivacy.searchUserByID' }, {
-                id: this.id
+        this.searchVisitorByID = function () {
+            piwikApi.post({ module: 'API', method: 'ExtendedPrivacy.searchVisitorByID' }, {
+                id: this.id,
+                format: 'JSON'
             }).then(function (success) {
                 var UI = require('piwik/UI');
                 var notification = new UI.Notification();

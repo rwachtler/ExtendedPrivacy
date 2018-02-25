@@ -10,6 +10,7 @@ namespace Piwik\Plugins\ExtendedPrivacy;
 
 use Piwik\DataTable;
 use Piwik\DataTable\Row;
+use Piwik\Piwik;
 
 /**
  * API for plugin ExtendedPrivacy
@@ -24,17 +25,15 @@ class API extends \Piwik\Plugin\API
      * /index.php?module=API&method=ExtendedPrivacy.getAnswerToLife
      * /index.php?module=API&method=ExtendedPrivacy.getAnswerToLife&truth=0
      *
-     * @param  bool $truth
+     * @param  int $id
      *
-     * @return int
+     * @return array
      */
-    public function getAnswerToLife($truth = true)
+    public function searchVisitorByID($id)
     {
-        if ($truth) {
-            return 42;
-        }
+        Piwik::checkUserHasSuperUserAccess();
 
-        return 24;
+        return $id;
     }
 
     /**
