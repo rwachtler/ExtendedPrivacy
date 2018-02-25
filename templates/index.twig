@@ -1,8 +1,41 @@
-{% extends 'dashboard.twig' %}
+{% extends 'admin.twig' %}
+
+{% set title %}{{ 'ExtendedPrivacy_TeaserHeadline'|translate }}{% endset %}
 
 {% block content %}
-    <strong>Hello world!</strong>
+{% if isSuperUser %}
+<div piwik-content-intro>
+    <h2 piwik-enriched-headline>{{ title }}</h2>
     <br/>
-
-    The answer to life is {{ answerToLife }}
+    <p>{{ 'ExtendedPrivacy_Teaser'|translate('<a href="#transparencyAnchor">',"</a>",'<a href="#anonymizationAnchor">',"</a>",'<a href="#dataAlterDeletionAnchor">',"</a>")|raw }}</p>
+</div>
+<div piwik-content-block
+     id="transparencyAnchor"
+     content-title="{{ 'ExtendedPrivacy_Transparency'|translate|e('html_attr') }}">
+     {% if transparencyType == false %}
+        <p>
+            <strong>{{ 'ExtendedPrivacy_NoIframeFound'|translate }}</strong>
+        </p>
+     {% else %}
+        <p>
+            {% if transparencyType == 'default' %}
+                <strong>{{ 'ExtendedPrivacy_CurrentTransparencyMode'|translate }}</strong>:
+                {{ 'ExtendedPrivacy_DefaultPiwikTransparency'|translate }}
+            {% endif %}
+            <br/>
+            <strong>{{ 'ExtendedPrivacy_CurrentTransparencyExplanation'|translate }}</strong>
+            <br/>
+            {{ transparencyIframeContent }}
+        </p>
+     {% endif %}
+</div>
+<div piwik-content-block
+     id="anonymizationAnchor"
+     content-title="{{ 'ExtendedPrivacy_Anonymization'|translate|e('html_attr') }}">
+</div>
+<div piwik-content-block
+     id="dataAlterDeletionAnchor"
+     content-title="{{ 'ExtendedPrivacy_DataAlterDelete'|translate|e('html_attr') }}">
+</div>
+{% endif %}
 {% endblock %}

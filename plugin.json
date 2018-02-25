@@ -8,9 +8,9 @@
     },
     "authors": [
         {
-            "name": "Matomo",
+            "name": "R. Wachtler",
             "email": "",
-            "homepage": ""
+            "homepage": "https://github.com/rwachtler"
         }
     ],
     "support": {
@@ -25,5 +25,7 @@
     },
     "homepage": "",
     "license": "GPL v3+",
-    "keywords": []
+    "keywords": [
+        "privacy"
+    ]
 }
