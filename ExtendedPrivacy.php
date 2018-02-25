@@ -10,4 +10,14 @@ namespace Piwik\Plugins\ExtendedPrivacy;
 
 class ExtendedPrivacy extends \Piwik\Plugin
 {
+    public function registerEvents() {
+        return array(
+            'AssetManager.getJavaScriptFiles' => 'getJavaScriptFiles',
+        );
+    }
+
+    public function getJavaScriptFiles(&$files) {
+        $files[] = "plugins/ExtendedPrivacy/angularjs/alter-delete/alter-delete.controller.js";
+    }
+
 }
