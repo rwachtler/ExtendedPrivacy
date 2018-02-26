@@ -18,17 +18,17 @@
         // remember to keep controller very simple. Create a service/factory (model) if needed
         var self = this;
 
-        this.searchVisitorByID = function () {
-            piwikApi.post({ module: 'API', method: 'ExtendedPrivacy.searchVisitorByID' }, {
-                id: this.id,
-                format: 'JSON'
-            }).then(function (success) {
+        this.getVisitorLogsByID = function () {
+            piwikApi.post({ module: 'API', method: 'ExtendedPrivacy.getVisitorLogsByID' }, {
+                id: this.id
+            }).then(function (data) {
+                console.log(data);
                 var UI = require('piwik/UI');
                 var notification = new UI.Notification();
                 notification.show(_pk_translate('CoreAdminHome_SettingsSaveSuccess'), { context: 'success', id: 'extendedPrivacySettings' });
                 notification.scrollToNotification();
-            }, function () {
-                // Failure
+            }, function (error) {
+                console.log(error);
             })
         }
     }

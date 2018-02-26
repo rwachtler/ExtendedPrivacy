@@ -20,37 +20,17 @@ use Piwik\Piwik;
 class API extends \Piwik\Plugin\API
 {
     /**
-     * Example method. Please remove if you do not need this API method.
-     * You can call this API method like this:
-     * /index.php?module=API&method=ExtendedPrivacy.getAnswerToLife
-     * /index.php?module=API&method=ExtendedPrivacy.getAnswerToLife&truth=0
-     *
      * @param  int $id
      *
      * @return array
      */
-    public function searchVisitorByID($id)
-    {
+    public function getVisitorLogsByID($id) {
         Piwik::checkUserHasSuperUserAccess();
 
-        return $id;
+        return $this->getModel()->getVisitorLogsByID($id);
     }
 
-    /**
-     * Another example method that returns a data table.
-     * @param int    $idSite
-     * @param string $period
-     * @param string $date
-     * @param bool|string $segment
-     * @return DataTable
-     */
-    public function getExampleReport($idSite, $period, $date, $segment = false)
-    {
-        $table = DataTable::makeFromSimpleArray(array(
-            array('label' => 'My Label 1', 'nb_visits' => '1'),
-            array('label' => 'My Label 2', 'nb_visits' => '5'),
-        ));
-
-        return $table;
+    private function getModel() {
+        return new Model();
     }
 }

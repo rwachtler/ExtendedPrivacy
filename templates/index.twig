@@ -53,7 +53,7 @@
              ng-model="AlterDeleteCtrl.id"
              title="{{ 'ExtendedPrivacy_SearchForVisitorID'|translate }}"
              value=""
-             piwik-onenter="AlterDeleteCtrl.searchVisitorByID()"
+             piwik-onenter="AlterDeleteCtrl.getVisitorLogsByID()"
              inline-help="{{ 'ExtendedPrivacy_SearchForVisitorIDInlineHelp'|translate }}">
         </div>
         <div piwik-save-button onconfirm=""></div>

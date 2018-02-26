@@ -90,8 +90,7 @@ class Controller extends \Piwik\Plugin\Controller
         return array();
     }
 
-    protected function getAnonymizeIPInfo()
-    {
+    protected function getAnonymizeIPInfo() {
         Piwik::checkUserHasSuperUserAccess();
         $anonymizeIP = array();
         $demoIP = '203.0.113.195';
