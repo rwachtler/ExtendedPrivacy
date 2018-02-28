@@ -19,8 +19,10 @@
         var self = this;
 
         this.getVisitorLogsByID = function () {
-            piwikApi.post({ module: 'API', method: 'ExtendedPrivacy.getVisitorLogsByID' }, {
-                id: this.id
+            piwikApi.fetch({
+                id: this.id,
+                module: 'API',
+                method: 'ExtendedPrivacy.getVisitorLogsByID'
             }).then(function (data) {
                 console.log(data);
                 var UI = require('piwik/UI');
