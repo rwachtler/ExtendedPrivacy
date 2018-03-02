@@ -53,8 +53,24 @@
              ng-model="AlterDeleteCtrl.id"
              title="{{ 'ExtendedPrivacy_SearchForVisitorID'|translate }}"
              value=""
-             piwik-onenter="AlterDeleteCtrl.getVisitorLogsByID()"
+             piwik-onenter="AlterDeleteCtrl.getDataForVisitorID()"
              inline-help="{{ 'ExtendedPrivacy_SearchForVisitorIDInlineHelp'|translate }}">
+        </div>
+        <div ng-show="AlterDeleteCtrl.showDetails">
+            {{ 'ExtendedPrivacy_FoundEntries'|translate }}<br/>
+            <table class="simple-table">
+                <tr>
+                    <th>Tabelle</th>
+                    <th>Anzahl der Einträge</th>
+                </tr>
+                {% verbatim %}
+                <tr ng-repeat="entry in AlterDeleteCtrl.entries">
+                    <td>{{ entry.tableName }}</td>
+                    <td>{{ entry.quantity }}</td>
+                </tr>
+                {% endverbatim %}
+            </table>
+            <br/>
         </div>
         <div piwik-save-button onconfirm=""></div>
      </div>

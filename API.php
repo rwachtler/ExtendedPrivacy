@@ -30,6 +30,15 @@ class API extends \Piwik\Plugin\API
         return $this->getModel()->getVisitorLogsByID($id);
     }
 
+    public function getVisitorLogsCountByID($id) {
+        Piwik::checkUserHasSuperUserAccess();
+        $data = $this->getModel()->getVisitorLogsCountByID($id);
+        return array(
+            'tableName' => $data['tableName'],
+            'quantity' => $data['queryData']
+        );
+    }
+
     private function getModel() {
         return new Model();
     }

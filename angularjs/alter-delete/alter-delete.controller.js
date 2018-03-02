@@ -17,21 +17,43 @@
     function AlterDeleteController(piwikApi) {
         // remember to keep controller very simple. Create a service/factory (model) if needed
         var self = this;
+        var UI = require('piwik/UI');
+        this.showDetails = false;
 
-        this.getVisitorLogsByID = function () {
-            piwikApi.fetch({
-                id: this.id,
+        getVisitorLogsByID = function (id) {
+            return piwikApi.fetch({
+                id,
                 module: 'API',
                 method: 'ExtendedPrivacy.getVisitorLogsByID'
-            }).then(function (data) {
-                console.log(data);
-                var UI = require('piwik/UI');
+            });
+        }
+
+        getVisitorLogsCountByID = function (id) {
+            return piwikApi.fetch({
+                id,
+                module: 'API',
+                method: 'ExtendedPrivacy.getVisitorLogsCountByID'
+            });
+        }
+
+        this.getDataForVisitorID = function () {
+            Promise.all([
+                getVisitorLogsCountByID(this.id)
+            ]).then(function (data = []) {
+                self.showDetails = true;
+                self.entries = data;
                 var notification = new UI.Notification();
-                notification.show(_pk_translate('CoreAdminHome_SettingsSaveSuccess'), { context: 'success', id: 'extendedPrivacySettings' });
+                notification.show(_pk_translate('ExtendedPrivacy_GenericSuccess'), { context: 'success', id: 'getDataForVisitorID-success' });
                 notification.scrollToNotification();
             }, function (error) {
-                console.log(error);
-            })
+                var notification = new UI.Notification();
+                notification.show(_pk_translate('ExtendedPrivacy_GenericError'), { context: 'error', id: 'getDataForVisitorID-error' });
+                notification.scrollToNotification();
+            }).catch(function (error) {
+                var notification = new UI.Notification();
+                notification.show(_pk_translate('ExtendedPrivacy_GenericError'), { context: 'error', id: 'getDataForVisitorID-error' });
+                notification.scrollToNotification();
+            });
         }
     }
 })();

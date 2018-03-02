@@ -8,18 +8,12 @@ use Piwik\DbHelper;
 use Piwik\Container\StaticContainer;
 
 class Model {
-
-    private static $rawPrefix = 'log_visit';
-    private $table;
-
-    public function __construct() {
-        $this->table = Common::prefixTable(self::$rawPrefix);
-    }
-
     /**
      * Returns all visitor logs for the given Visitor-ID
      */
     public function getVisitorLogsByID($visitorID) {
+        $rawPrefix = 'log_visit';
+        $table = Common::prefixTable($rawPrefix);
         $columns = implode(', ', array(
             'HEX(idvisitor)',
             'HEX(location_ip)',
@@ -38,9 +32,30 @@ class Model {
             'location_country'
         ));
         $bind = array($visitorID);
-        $query = 'SELECT ' . $columns . ' FROM ' . $this->table . ' WHERE HEX(idvisitor) = ?';
+        $query = 'SELECT ' . $columns . ' FROM ' . $table . ' WHERE HEX(idvisitor) = ?';
+        $queryResult = $this->getDb()->fetchAll($query, $bind);
 
-        return $this->getDb()->fetchAll($query, $bind);
+        return $this->dataWithTableName($rawPrefix, $queryResult);
+    }
+
+    /**
+     * Returns the amount of entries inside the `log_visit` table
+     */
+    public function getVisitorLogsCountByID($visitorID) {
+        $rawPrefix = 'log_visit';
+        $table = Common::prefixTable($rawPrefix);
+        $bind = array($visitorID);
+        $query = 'SELECT COUNT(HEX(idvisitor)) AS entries' . ' FROM ' . $table . ' WHERE HEX(idvisitor) = ?';
+        $queryResult = $this->getDb()->fetchOne($query, $bind);
+
+        return $this->dataWithTableName($rawPrefix, $queryResult);
+    }
+
+    private function dataWithTableName($table, $queryResult) {
+        return array(
+            'tableName' => $table,
+            'queryData' => $queryResult
+        );
     }
 
     private function getDb() {

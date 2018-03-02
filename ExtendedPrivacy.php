@@ -13,11 +13,17 @@ class ExtendedPrivacy extends \Piwik\Plugin
     public function registerEvents() {
         return array(
             'AssetManager.getJavaScriptFiles' => 'getJavaScriptFiles',
+            'Translate.getClientSideTranslationKeys' => 'getClientSideTranslationKeys'
         );
     }
 
     public function getJavaScriptFiles(&$files) {
         $files[] = "plugins/ExtendedPrivacy/angularjs/alter-delete/alter-delete.controller.js";
+    }
+
+    public function getClientSideTranslationKeys(&$translationKeys) {
+        $translationKeys[] = 'ExtendedPrivacy_GenericError';
+        $translationKeys[] = 'ExtendedPrivacy_GenericSuccess';
     }
 
 }
