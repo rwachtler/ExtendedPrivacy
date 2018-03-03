@@ -51,6 +51,38 @@ class Model {
         return $this->dataWithTableName($rawPrefix, $queryResult);
     }
 
+    /**
+     * Returns the amount of database entries where a visitorID is present
+     * Following tables will be included
+     * log_conversion
+     * log_conversion_item
+     * log_link_visit_action
+     * log_visit
+     *
+     */
+    public function getLogsForVisitorID($visitorID) {
+        $rawPrefixConversion = 'log_conversion';
+        $rawPrefixConversionItem = 'log_conversion_item';
+        $rawPrefixLinkVisitAction = 'log_link_visit_action';
+        $rawPrefixVisit = 'log_visit';
+
+        $tableConversion = Common::prefixTable($rawPrefixConversion);
+        $tableConversionItem = Common::prefixTable($rawPrefixConversionItem);
+        $tableLinkVisitAction = Common::prefixTable($rawPrefixLinkVisitAction);
+        $tableVisit = Common::prefixTable($rawPrefixVisit);
+
+        $bind = array($visitorID, $visitorID, $visitorID, $visitorID);
+        $query = 'SELECT ' .
+                    '(SELECT COUNT(HEX(idvisitor)) AS entries FROM ' . $tableConversion . ' WHERE HEX(idvisitor) = ?) as ' . $rawPrefixConversion . ', ' .
+                    '(SELECT COUNT(HEX(idvisitor)) AS entries FROM ' . $tableConversionItem . ' WHERE HEX(idvisitor) = ?) as ' . $rawPrefixConversionItem . ', ' .
+                    '(SELECT COUNT(HEX(idvisitor)) AS entries FROM ' . $tableLinkVisitAction . ' WHERE HEX(idvisitor) = ?) as ' . $rawPrefixLinkVisitAction . ', ' .
+                    '(SELECT COUNT(HEX(idvisitor)) AS entries FROM ' . $tableVisit . ' WHERE HEX(idvisitor) = ?) as ' . $rawPrefixVisit . '';
+
+        $queryResult = $this->getDb()->fetchAll($query, $bind);
+
+        return $queryResult;
+    }
+
     private function dataWithTableName($table, $queryResult) {
         return array(
             'tableName' => $table,

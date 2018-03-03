@@ -47,7 +47,7 @@
 </div>
 <div piwik-content-block
      id="dataAlterDeletionAnchor"
-     content-title="{{ 'ExtendedPrivacy_DataAlterDelete'|translate|e('html_attr') }}">
+     content-title="{{ 'ExtendedPrivacy_DataDelete'|translate|e('html_attr') }}">
      <div piwik-form ng-controller="AlterDeleteController as AlterDeleteCtrl">
         <div piwik-field uicontrol="text" name="piwikAlterDeleteVisitorID"
              ng-model="AlterDeleteCtrl.id"
@@ -56,8 +56,14 @@
              piwik-onenter="AlterDeleteCtrl.getDataForVisitorID()"
              inline-help="{{ 'ExtendedPrivacy_SearchForVisitorIDInlineHelp'|translate }}">
         </div>
+        <div class="notification system notification-error" ng-show="AlterDeleteCtrl.performedRequest && !AlterDeleteCtrl.showDetails">
+            {{ 'ExtendedPrivacy_NoEntriesFound'|translate }}
+        </div>
         <div ng-show="AlterDeleteCtrl.showDetails">
-            {{ 'ExtendedPrivacy_FoundEntries'|translate }}<br/>
+            <div>
+                {{ 'ExtendedPrivacy_FoundEntries'|translate }}
+            </div>
+            <br/>
             <table class="simple-table">
                 <tr>
                     <th>Tabelle</th>
@@ -72,7 +78,10 @@
             </table>
             <br/>
         </div>
-        <div piwik-save-button onconfirm=""></div>
+        <button class="btn" ng-click="AlterDeleteCtrl.deleteAllEntries()">
+            {{ 'ExtendedPrivacy_DeleteAll'|translate }}
+        </button>
+        <span><i>{{ 'ExtendedPrivacy_NotRevertable'|translate }}</i></span>
      </div>
 </div>
 {% endif %}

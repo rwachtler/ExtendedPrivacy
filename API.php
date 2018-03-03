@@ -32,10 +32,24 @@ class API extends \Piwik\Plugin\API
 
     public function getVisitorLogsCountByID($id) {
         Piwik::checkUserHasSuperUserAccess();
-        $data = $this->getModel()->getVisitorLogsCountByID($id);
+        $data = $this->getModel()->getLogsForVisitorID($id);
         return array(
-            'tableName' => $data['tableName'],
-            'quantity' => $data['queryData']
+            (object) array(
+                'tableName' => 'log_conversion',
+                'quantity' => (int)$data[0]['log_conversion']
+            ),
+            (object) array(
+                'tableName' => 'log_conversion_item',
+                'quantity' => (int)$data[0]['log_conversion_item']
+            ),
+            (object) array(
+                'tableName' => 'log_link_visit_action',
+                'quantity' => (int)$data[0]['log_link_visit_action']
+            ),
+            (object) array(
+                'tableName' => 'log_visit',
+                'quantity' => (int)$data[0]['log_visit']
+            )
         );
     }
 

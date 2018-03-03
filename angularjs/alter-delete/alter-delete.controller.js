@@ -5,10 +5,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-/**
- * Usage:
- * <piwik-alter-delete>
- */
 (function () {
     angular.module('piwikApp').controller('AlterDeleteController', AlterDeleteController);
 
@@ -19,6 +15,7 @@
         var self = this;
         var UI = require('piwik/UI');
         this.showDetails = false;
+        this.performedRequest = false;
 
         getVisitorLogsByID = function (id) {
             return piwikApi.fetch({
@@ -37,23 +34,26 @@
         }
 
         this.getDataForVisitorID = function () {
-            Promise.all([
-                getVisitorLogsCountByID(this.id)
-            ]).then(function (data = []) {
-                self.showDetails = true;
-                self.entries = data;
-                var notification = new UI.Notification();
-                notification.show(_pk_translate('ExtendedPrivacy_GenericSuccess'), { context: 'success', id: 'getDataForVisitorID-success' });
-                notification.scrollToNotification();
-            }, function (error) {
-                var notification = new UI.Notification();
-                notification.show(_pk_translate('ExtendedPrivacy_GenericError'), { context: 'error', id: 'getDataForVisitorID-error' });
-                notification.scrollToNotification();
-            }).catch(function (error) {
-                var notification = new UI.Notification();
-                notification.show(_pk_translate('ExtendedPrivacy_GenericError'), { context: 'error', id: 'getDataForVisitorID-error' });
-                notification.scrollToNotification();
-            });
+            getVisitorLogsCountByID(this.id)
+                .then(function (data = []) {
+                    self.entries = data.filter(entry => entry.quantity > 0);
+                    self.showDetails = self.entries.length > 0;
+                    self.performedRequest = true;
+                    var notification = new UI.Notification();
+                    notification.show(_pk_translate('ExtendedPrivacy_GenericSuccess'), { context: 'success', id: 'getDataForVisitorID-success' });
+                    notification.scrollToNotification();
+                }, function (error) {
+                    var notification = new UI.Notification();
+                    notification.show(_pk_translate('ExtendedPrivacy_GenericError'), { context: 'error', id: 'getDataForVisitorID-error' });
+                    notification.scrollToNotification();
+                }).catch(function (error) {
+                    var notification = new UI.Notification();
+                    notification.show(_pk_translate('ExtendedPrivacy_GenericError'), { context: 'error', id: 'getDataForVisitorID-error' });
+                    notification.scrollToNotification();
+                });
+        }
+
+        this.deleteAllEntries = function () {
         }
     }
 })();
