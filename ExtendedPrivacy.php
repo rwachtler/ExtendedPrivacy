@@ -19,6 +19,7 @@ class ExtendedPrivacy extends \Piwik\Plugin
 
     public function getJavaScriptFiles(&$files) {
         $files[] = "plugins/ExtendedPrivacy/angularjs/alter-delete/alter-delete.controller.js";
+        $files[] = "plugins/ExtendedPrivacy/angularjs/alter-delete/alter-delete.model.js";
     }
 
     public function getClientSideTranslationKeys(&$translationKeys) {

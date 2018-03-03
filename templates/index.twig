@@ -53,7 +53,7 @@
              ng-model="AlterDeleteCtrl.id"
              title="{{ 'ExtendedPrivacy_SearchForVisitorID'|translate }}"
              value=""
-             piwik-onenter="AlterDeleteCtrl.getDataForVisitorID()"
+             piwik-onenter="AlterDeleteCtrl.getData()"
              inline-help="{{ 'ExtendedPrivacy_SearchForVisitorIDInlineHelp'|translate }}">
         </div>
         <div class="notification system notification-error" ng-show="AlterDeleteCtrl.performedRequest && !AlterDeleteCtrl.showDetails">
