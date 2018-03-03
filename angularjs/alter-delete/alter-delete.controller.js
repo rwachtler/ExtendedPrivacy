@@ -47,6 +47,9 @@
         }
 
         this.deleteAllEntries = function () {
+            piwikHelper.modalConfirm('#confirmDeleteAllData', {
+                yes: function () { }
+            });
         }
     }
 })();

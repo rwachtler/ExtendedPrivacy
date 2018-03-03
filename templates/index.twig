@@ -78,10 +78,19 @@
             </table>
             <br/>
         </div>
-        <button class="btn" ng-click="AlterDeleteCtrl.deleteAllEntries()">
+        <button
+            class="btn"
+            ng-click="AlterDeleteCtrl.deleteAllEntries()"
+            ng-disabled="(AlterDeleteCtrl.performedRequest && !AlterDeleteCtrl.showDetails) || !AlterDeleteCtrl.performedRequest"
+        >
             {{ 'ExtendedPrivacy_DeleteAll'|translate }}
         </button>
         <span><i>{{ 'ExtendedPrivacy_NotRevertable'|translate }}</i></span>
+        <div id="confirmDeleteAllData" class="ui-confirm">
+            <h2 id="extendedPrivacyDeleteAllDataConfgirm">{{ 'ExtendedPrivacy_DeletionConfirm'|translate }}</h2>
+            <input role="yes" type="button" value="{{ 'General_Yes'|translate }}"/>
+            <input role="no" type="button" value="{{ 'General_No'|translate }}"/>
+        </div>
      </div>
 </div>
 {% endif %}

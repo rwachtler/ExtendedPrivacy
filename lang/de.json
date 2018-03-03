@@ -7,6 +7,7 @@
         "DataDelete": "Datenlöschung",
         "DefaultPiwikTransparency": "Sie nutzen derzeit die Standardeinstellung von Matomo - das 'Opt-Out' iframe",
         "DeleteAll": "Alles löschen",
+        "DeletionConfirm": "Sind Sie sich ganz sicher, dass Sie wirklich alle Einträge für diese Besucher-ID löschen wollen?",
         "FoundEntries": "Für die angegebene Besucherprofil-ID wurden in der Datenbank folgende Einträge gefunden:",
         "IPAnonymizationInUse": "IP-Adresse von Besuchern wird anonymisiert!",
         "GenericError": "Ein Fehler ist aufgetreten!",
