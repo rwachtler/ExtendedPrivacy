@@ -1,6 +1,7 @@
 {
     "ExtendedPrivacy": {
         "Anonymization": "Anonymisierung",
+        "ChangeCurrentTransparencyExplanation": "Sie können folgende Passagen durch eigene Worte ersetzen: ",
         "CurrentTransparencyExplanation": "Der aktuelle Tracking-Hinweis lautet wie folgt: ",
         "CurrentTransparencyMode": "Zustimmung-/Widerspruchmethode:",
         "DataAlterDelete": "Datenänderung / Datenlöschung",

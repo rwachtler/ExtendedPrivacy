@@ -32,9 +32,14 @@ class Controller extends \Piwik\Plugin\Controller
         if (Piwik::hasUserSuperUserAccess()) {
             $trackingInfo = $this->getTrackingInfoIframe();
             $anonymizeIPInfo = $this->getAnonymizeIPInfo();
+            $defaultOptOutTranslation =
+                Piwik::translate('CoreAdminHome_YouMayOptOut') . '<br/>' .
+                Piwik::translate('CoreAdminHome_YouMayOptOutBis') . '<br/>' .
+                Piwik::translate('CoreAdminHome_YouAreOptedIn') . '<br />' .
+                Piwik::translate('CoreAdminHome_ClickHereToOptOut');
             $viewData = array(
                 'transparencyType' => isset($trackingInfo['type']) ? $trackingInfo['type'] : '',
-                'transparencyIframeContent' => isset($trackingInfo['content']) ? $trackingInfo['content'] : '',
+                'transparencyIframeContent' => isset($trackingInfo['content']) ? $defaultOptOutTranslation : '',
                 'anonymizeIPInUse' => $anonymizeIPInfo['enabled'],
                 'anonymizeIPMaskLength' => $anonymizeIPInfo['maskLength'],
                 'anonymizeIPForAnonymousVisitEnrichment' => $anonymizeIPInfo['useAnonymizedIpForVisitEnrichment'],

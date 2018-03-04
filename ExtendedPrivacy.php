@@ -20,11 +20,17 @@ class ExtendedPrivacy extends \Piwik\Plugin
     public function getJavaScriptFiles(&$files) {
         $files[] = "plugins/ExtendedPrivacy/angularjs/alter-delete/alter-delete.controller.js";
         $files[] = "plugins/ExtendedPrivacy/angularjs/alter-delete/alter-delete.model.js";
+        $files[] = "plugins/ExtendedPrivacy/angularjs/transparency/transparency.controller.js";
+        $files[] = "plugins/ExtendedPrivacy/angularjs/transparency/transparency.model.js";
     }
 
     public function getClientSideTranslationKeys(&$translationKeys) {
         $translationKeys[] = 'ExtendedPrivacy_GenericError';
         $translationKeys[] = 'ExtendedPrivacy_GenericSuccess';
+        $translationKeys[] = 'CoreAdminHome_YouMayOptOut';
+        $translationKeys[] = 'CoreAdminHome_YouAreOptedIn';
+        $translationKeys[] = 'CoreAdminHome_YouMayOptOutBis';
+        $translationKeys[] = 'CoreAdminHome_ClickHereToOptOut';
     }
 
 }

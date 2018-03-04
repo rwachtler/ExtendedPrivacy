@@ -19,14 +19,37 @@
      {% else %}
         <p>
             {% if transparencyType == 'default' %}
-                <strong>{{ 'ExtendedPrivacy_CurrentTransparencyMode'|translate }}</strong>:
+                <strong>{{ 'ExtendedPrivacy_CurrentTransparencyMode'|translate }}</strong>
                 {{ 'ExtendedPrivacy_DefaultPiwikTransparency'|translate }}
             {% endif %}
-            <br/>
+            <div>
             <strong>{{ 'ExtendedPrivacy_CurrentTransparencyExplanation'|translate }}</strong>
             <br/>
-            {{ transparencyIframeContent }}
+            <i>{{ transparencyIframeContent|raw }}</i>
+            </div>
         </p>
+        {% if transparencyType == 'default' %}
+            <div ng-controller="TransparencyController as TransparencyCtrl">
+                <strong>{{ 'ExtendedPrivacy_ChangeCurrentTransparencyExplanation'|translate }}</strong>
+                <br/><br/>
+                <div class="row">
+                    <textarea ng-model="TransparencyCtrl.YouMayOptOut" style="resize: vertical" class="col s6"></textarea>
+                    <button class="col s3" piwik-save-button onconfirm="TransparencyCtrl.save('YouMayOptOut')"></button>
+                </div>
+                <div class="row">
+                    <textarea ng-model="TransparencyCtrl.YouMayOptOutBis" style="resize: vertical" class="col s6"></textarea>
+                    <button class="col s3" piwik-save-button onconfirm="TransparencyCtrl.save('YouMayOptOutBis')"></button>
+                </div>
+                <div class="row">
+                    <textarea ng-model="TransparencyCtrl.YouAreOptedIn" style="resize: vertical" class="col s6"></textarea>
+                    <button class="col s3" piwik-save-button onconfirm="TransparencyCtrl.save('YouAreOptedIn')"></button>
+                </div>
+                <div class="row">
+                    <textarea ng-model="TransparencyCtrl.ClickHereToOptOut" style="resize: vertical" class="col s6"></textarea>
+                    <button class="col s3" piwik-save-button onconfirm="TransparencyCtrl.save('ClickHereToOptOut')"></button>
+                </div>
+            </div>
+        {% endif %}
      {% endif %}
 </div>
 <div piwik-content-block
