@@ -83,6 +83,31 @@ class Model {
         return $queryResult;
     }
 
+    /**
+     * Deletes all data for a given visitor-id
+     * Following tables will be included
+     * log_conversion
+     * log_conversion_item
+     * log_link_visit_action
+     * log_visit
+     */
+    public function deleteVisitorLogsByID($id) {
+        $tables = array('log_conversion', 'log_conversion_item', 'log_link_visit_action', 'log_visit');
+        $deletionResult = array();
+        foreach ($tables as &$tableName) {
+            $deletionResult[$tableName] = Db::deleteAllRows(
+                Common::prefixTable($tableName),
+                'WHERE HEX(idvisitor) = ?',
+                'HEX(idvisitor) ASC',
+                100000,
+                array($id)
+            );
+        }
+        unset($tableName);
+
+        return $deletionResult;
+    }
+
     private function dataWithTableName($table, $queryResult) {
         return array(
             'tableName' => $table,
