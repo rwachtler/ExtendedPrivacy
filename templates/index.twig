@@ -82,6 +82,9 @@
         <div class="notification system notification-error" ng-show="AlterDeleteCtrl.performedRequest && !AlterDeleteCtrl.showDetails">
             {{ 'ExtendedPrivacy_NoEntriesFound'|translate }}
         </div>
+        <div class="notification system notification-success" ng-show="AlterDeleteCtrl.deletionSuccess">
+            {{ 'ExtendedPrivacy_EntriesSuccessfullyDeleted'|translate }}
+        </div>
         <div ng-show="AlterDeleteCtrl.showDetails">
             <div>
                 {{ 'ExtendedPrivacy_FoundEntries'|translate }}

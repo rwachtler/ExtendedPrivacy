@@ -12,7 +12,8 @@
 
     function AlterDeleteModel(piwik, piwikApi) {
         var model = {
-            getDataCountForVisitorID
+            getVisitorLogsCountByID,
+            deleteVisitorLogsByID
         };
 
         return model;
@@ -33,8 +34,10 @@
             });
         }
 
-        function getDataCountForVisitorID(id) {
-            return getVisitorLogsCountByID(id);
+        function deleteVisitorLogsByID(id) {
+            return piwikApi.post({ module: 'API', method: 'ExtendedPrivacy.deleteVisitorLogsByID' }, {
+                id
+            });
         }
     }
 })();

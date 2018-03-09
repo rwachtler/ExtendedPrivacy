@@ -16,9 +16,17 @@
         var UI = require('piwik/UI');
         this.showDetails = false;
         this.performedRequest = false;
+        this.deletionSuccess = false;
+
+        function restoreState() {
+            self.showDetails = false;
+            self.performedRequest = false;
+            self.entries = [];
+        }
 
         this.getData = function () {
-            AlterDeleteModel.getDataCountForVisitorID(self.id)
+            self.deletionSuccess = false;
+            AlterDeleteModel.getVisitorLogsCountByID(self.id)
                 .then(function (data = []) {
                     self.entries = data.filter(entry => entry.quantity > 0);
                     self.showDetails = self.entries.length > 0;
@@ -29,14 +37,9 @@
                         { context: 'success', id: 'getDataForVisitorID-success' }
                     );
                     notification.scrollToNotification();
-                }, function (error) {
-                    var notification = new UI.Notification();
-                    notification.show(
-                        _pk_translate('ExtendedPrivacy_GenericError'),
-                        { context: 'error', id: 'getDataForVisitorID-error' }
-                    );
-                    notification.scrollToNotification();
                 }).catch(function (error) {
+                    console.error(error);
+                    restoreState();
                     var notification = new UI.Notification();
                     notification.show(
                         _pk_translate('ExtendedPrivacy_GenericError'),
@@ -48,7 +51,35 @@
 
         this.deleteAllEntries = function () {
             piwikHelper.modalConfirm('#confirmDeleteAllData', {
-                yes: function () { }
+                yes: function () {
+                    AlterDeleteModel.deleteVisitorLogsByID(self.id)
+                        .then(function (data = []) {
+                            var deletedEntries = data.filter(entry => entry.quantity > 0);
+                            var deletionMatch = self.entries.every(entry => {
+                                var requestedEntry = self.entries.find(element => element.tableName === entry.tableName);
+                                return requestedEntry && requestedEntry.quantity === entry.quantity;
+                            });
+                            if (deletedEntries.length !== self.entries.length) {
+                                deletionMatch = false;
+                            }
+                            if (deletionMatch) {
+                                self.deletionSuccess = true;
+                                restoreState();
+                            } else {
+                                throw new Error('Oops! Looks like the data deletion did not work out as expected! Deletion match was falsy.')
+                            }
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                            restoreState();
+                            var notification = new UI.Notification();
+                            notification.show(
+                                _pk_translate('ExtendedPrivacy_GenericError'),
+                                { context: 'error', id: 'deleteVisitorLogsByID-error' }
+                            );
+                            notification.scrollToNotification();
+                        })
+                }
             });
         }
     }
