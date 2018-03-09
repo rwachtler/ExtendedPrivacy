@@ -89,11 +89,10 @@
             <div>
                 {{ 'ExtendedPrivacy_FoundEntries'|translate }}
             </div>
-            <br/>
             <table class="simple-table">
                 <tr>
-                    <th>Tabelle</th>
-                    <th>Anzahl der Einträge</th>
+                    <th>{{ 'ExtendedPrivacy_Table'|translate }}</th>
+                    <th>{{ 'ExtendedPrivacy_EntriesCount'|translate }}</th>
                 </tr>
                 {% verbatim %}
                 <tr ng-repeat="entry in AlterDeleteCtrl.entries">
