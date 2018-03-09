@@ -1,6 +1,7 @@
 {
     "ExtendedPrivacy": {
         "Anonymization": "Anonymisierung",
+        "Caution": "Achtung",
         "ChangeCurrentTransparencyExplanation": "Sie können folgende Passagen durch eigene Worte ersetzen: ",
         "CurrentTransparencyExplanation": "Der aktuelle Tracking-Hinweis lautet wie folgt: ",
         "CurrentTransparencyMode": "Zustimmung-/Widerspruchmethode:",
@@ -11,6 +12,7 @@
         "DeletionConfirm": "Sind Sie sich ganz sicher, dass Sie wirklich alle Einträge für diese Besucher-ID löschen wollen?",
         "EntriesCount": "Anzahl der Einträge",
         "EntriesSuccessfullyDeleted": "Die Einträge wurden erfolgreich gelöscht!",
+        "Error": "Fehler",
         "FoundEntries": "Für die angegebene Besucherprofil-ID wurden in der Datenbank folgende Einträge gefunden:",
         "IPAnonymizationInUse": "IP-Adresse von Besuchern wird anonymisiert!",
         "GenericError": "Ein Fehler ist aufgetreten!",
@@ -28,6 +30,7 @@
         "UrlPrivacy": "datenschutz",
         "UrlPrivacyAlt": "privacy",
         "UrlTerms": "agb",
-        "UrlLegal": "impressum"
+        "UrlLegal": "impressum",
+        "Warning": "Warnung"
     }
 }

@@ -31,19 +31,13 @@
                     self.entries = data.filter(entry => entry.quantity > 0);
                     self.showDetails = self.entries.length > 0;
                     self.performedRequest = true;
-                    const notification = new UI.Notification();
-                    notification.show(
-                        _pk_translate('ExtendedPrivacy_GenericSuccess'),
-                        { context: 'success', id: 'getDataForVisitorID-success' }
-                    );
-                    notification.scrollToNotification();
                 }).catch(error => {
                     console.error(error);
                     restoreState();
                     const notification = new UI.Notification();
                     notification.show(
                         _pk_translate('ExtendedPrivacy_GenericError'),
-                        { context: 'error', id: 'getDataForVisitorID-error' }
+                        { context: 'error', placeat: '#extended-privacy-notifications' }
                     );
                     notification.scrollToNotification();
                 });
@@ -75,7 +69,7 @@
                             const notification = new UI.Notification();
                             notification.show(
                                 _pk_translate('ExtendedPrivacy_GenericError'),
-                                { context: 'error', id: 'deleteVisitorLogsByID-error' }
+                                { context: 'error', placeat: '#extended-privacy-notifications' }
                             );
                             notification.scrollToNotification();
                         })
