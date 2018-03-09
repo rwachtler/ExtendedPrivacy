@@ -12,8 +12,8 @@
 
     function TransparencyController(TransparencyModel, piwikApi) {
         // remember to keep controller very simple. Create a service/factory (model) if needed
-        var self = this;
-        var UI = require('piwik/UI');
+        const self = this;
+        const UI = require('piwik/UI');
         this.showDetails = false;
         this.performedRequest = false;
         this.YouMayOptOut = initTranslation('YouMayOptOut');
