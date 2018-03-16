@@ -7,7 +7,7 @@
 <div piwik-content-intro>
     <h2 piwik-enriched-headline>{{ title }}</h2>
     <br/>
-    <p>{{ 'ExtendedPrivacy_Teaser'|translate('<a href="#transparencyAnchor">',"</a>",'<a href="#anonymizationAnchor">',"</a>",'<a href="#dataAlterDeletionAnchor">',"</a>")|raw }}</p>
+    <p>{{ 'ExtendedPrivacy_Teaser'|translate('<a href="##transparencyAnchor">',"</a>",'<a href="##anonymizationAnchor">',"</a>",'<a href="##dataAlterDeletionAnchor">',"</a>")|raw }}</p>
 </div>
 <div piwik-content-block
      id="transparencyAnchor"
@@ -23,11 +23,6 @@
                 <strong>{{ 'ExtendedPrivacy_CurrentTransparencyMode'|translate }}</strong>
                 {{ 'ExtendedPrivacy_DefaultPiwikTransparency'|translate }}
             {% endif %}
-            <div>
-            <strong>{{ 'ExtendedPrivacy_CurrentTransparencyExplanation'|translate }}</strong>
-            <br/>
-            <i>{{ transparencyIframeContent|raw }}</i>
-            </div>
         </p>
         {% if transparencyType == 'default' %}
             <div ng-controller="TransparencyController as TransparencyCtrl">
