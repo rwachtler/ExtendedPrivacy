@@ -39,7 +39,7 @@ class Controller extends \Piwik\Plugin\Controller
                 Piwik::translate('CoreAdminHome_ClickHereToOptOut');
             $viewData = array(
                 'transparencyType' => isset($trackingInfo['type']) ? $trackingInfo['type'] : '',
-                'transparencyIframeContent' => isset($trackingInfo['content']) ? $defaultOptOutTranslation : '',
+                // 'transparencyIframeContent' => isset($trackingInfo['content']) ? $defaultOptOutTranslation : '',
                 'anonymizeIPInUse' => $anonymizeIPInfo['enabled'],
                 'anonymizeIPMaskLength' => $anonymizeIPInfo['maskLength'],
                 'anonymizeIPForAnonymousVisitEnrichment' => $anonymizeIPInfo['useAnonymizedIpForVisitEnrichment'],

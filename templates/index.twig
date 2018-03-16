@@ -23,11 +23,11 @@
                 <strong>{{ 'ExtendedPrivacy_CurrentTransparencyMode'|translate }}</strong>
                 {{ 'ExtendedPrivacy_DefaultPiwikTransparency'|translate }}
             {% endif %}
-            <div>
+            {# <div>
             <strong>{{ 'ExtendedPrivacy_CurrentTransparencyExplanation'|translate }}</strong>
             <br/>
             <i>{{ transparencyIframeContent|raw }}</i>
-            </div>
+            </div> #}
         </p>
         {% if transparencyType == 'default' %}
             <div ng-controller="TransparencyController as TransparencyCtrl">
