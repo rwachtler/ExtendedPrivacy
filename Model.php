@@ -125,6 +125,16 @@ class Model {
         Db::query($query, $bind);
     }
 
+    public function fetchTranslation($translationKey) {
+        $rawPrefix = 'translation_overrides';
+        $table = Common::prefixTable($rawPrefix);
+        $bind = array($translationKey);
+        $query = 'SELECT translation_value FROM ' . $table . ' WHERE translation_key = ?';
+        $queryResult = $this->getDb()->fetchOne($query, $bind);
+
+        return (string) $queryResult;
+    }
+
     private function dataWithTableName($table, $queryResult) {
         return array(
             'tableName' => $table,

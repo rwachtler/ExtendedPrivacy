@@ -19,8 +19,28 @@ class CustomTranslationLoader extends \Piwik\Translation\Loader\JsonFileLoader
     {
         $translations = parent::load($language, $directories);
 
-        // EXAMPLE: $translations['CoreAdminHome']['YouMayOptOut'] = 'my custom text';
+        $YouMayOptOut = $this->getModel()->fetchTranslation('YouMayOptOut');
+        $ClickHereToOptOut = $this->getModel()->fetchTranslation('ClickHereToOptOut');
+        $YouMayOptOutBis = $this->getModel()->fetchTranslation('YouMayOptOutBis');
+        $YouAreOptedIn = $this->getModel()->fetchTranslation('YouAreOptedIn');
+
+        if ($YouMayOptOut) {
+            $translations['CoreAdminHome']['YouMayOptOut'] = $YouMayOptOut;
+        }
+        if ($ClickHereToOptOut) {
+            $translations['CoreAdminHome']['ClickHereToOptOut'] = $ClickHereToOptOut;
+        }
+        if ($YouMayOptOutBis) {
+            $translations['CoreAdminHome']['YouMayOptOutBis'] = $YouMayOptOutBis;
+        }
+        if ($YouAreOptedIn) {
+            $translations['CoreAdminHome']['YouAreOptedIn'] = $YouAreOptedIn;
+        }
 
         return $translations;
+    }
+
+    private function getModel() {
+        return new Model();
     }
 }
