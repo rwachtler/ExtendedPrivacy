@@ -12,9 +12,16 @@
 
     function TransparencyModel(piwik, piwikApi) {
         var model = {
-
+            createOrUpdateTranslation
         };
 
         return model;
+
+        function createOrUpdateTranslation(translationKey, translationValue) {
+            return piwikApi.post({ module: 'API', method: 'ExtendedPrivacy.createOrUpdateTranslation' }, {
+                translationKey,
+                translationValue
+            });
+        }
     }
 })();

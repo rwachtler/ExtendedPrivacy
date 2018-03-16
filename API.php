@@ -87,6 +87,16 @@ class API extends \Piwik\Plugin\API
         );
     }
 
+    /**
+     * @param string $translationKey
+     * @param string $translationValue
+     */
+    public function createOrUpdateTranslation($translationKey, $translationValue) {
+        Piwik::checkUserHasSuperUserAccess();
+
+        $this->getModel()->createOrUpdateTranslation($translationKey, $translationValue);
+    }
+
     private function getModel() {
         return new Model();
     }

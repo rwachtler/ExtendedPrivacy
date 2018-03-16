@@ -108,6 +108,23 @@ class Model {
         return $deletionResult;
     }
 
+    /**
+     * Populates custom overrides into the translation_overrides table
+     * $translationKey - original Matomo translation key
+     * $translationValue - desired translation value
+     */
+    public function createOrUpdateTranslation($translationKey, $translationValue) {
+        $rawPrefix = 'translation_overrides';
+        $table = Common::prefixTable($rawPrefix);
+        $bind = array($translationKey, $translationValue, $translationValue);
+        $query = sprintf(
+            'INSERT INTO %s (translation_key, translation_value) VALUES (?,?) ON DUPLICATE KEY UPDATE translation_value=?',
+             $table
+        );
+
+        Db::query($query, $bind);
+    }
+
     private function dataWithTableName($table, $queryResult) {
         return array(
             'tableName' => $table,

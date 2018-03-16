@@ -22,7 +22,26 @@
         this.YouAreOptedIn = initTranslation('YouAreOptedIn');
 
         this.save = function (key) {
-            // TODO: implement
+            TransparencyModel.createOrUpdateTranslation(key, self[key])
+                .then(data => {
+                    if (data.result === 'success') {
+                        const notification = new UI.Notification();
+                        notification.show(
+                            _pk_translate('ExtendedPrivacy_GenericSuccess'),
+                            { context: 'success', placeat: '#extended-privacy-notifications-transparency' }
+                        );
+                        notification.scrollToNotification();
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    const notification = new UI.Notification();
+                    notification.show(
+                        _pk_translate('ExtendedPrivacy_GenericError'),
+                        { context: 'error', placeat: '#extended-privacy-notifications-transparency' }
+                    );
+                    notification.scrollToNotification();
+                })
         }
 
         function initTranslation(key) {
