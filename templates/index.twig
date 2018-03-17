@@ -102,6 +102,10 @@
         {% else %}
             {{ 'General_Yes'|translate }}
         {% endif %}
+        <div>
+            <br/>
+            {{ 'ExtendedPrivacy_IPSettingsHint'|translate('<a href="index.php?module=PrivacyManager&action=privacySettings##anonymizeIPAnchor" target="_blank">','</a>')|raw }}
+        </div>
      {% endif %}
 </div>
 <div piwik-content-block

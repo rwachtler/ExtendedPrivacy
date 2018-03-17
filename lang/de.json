@@ -16,6 +16,7 @@
         "Error": "Fehler",
         "FoundEntries": "Für die angegebene Besucherprofil-ID wurden in der Datenbank folgende Einträge gefunden:",
         "IPAnonymizationInUse": "IP-Adresse von Besuchern wird anonymisiert!",
+        "IPSettingsHint": "Sie können die IP-Einstellungen %1$shier%2$s ändern.",
         "GenericError": "Ein Fehler ist aufgetreten!",
         "GenericSuccess": "Die Aktion wurde erfolgreich durchgeführt!",
         "MenuExtendedPrivacySettings": "Erweiterte Privatsphäre",
