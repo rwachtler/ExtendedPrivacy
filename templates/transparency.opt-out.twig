@@ -1,0 +1,124 @@
+<p>
+    <strong>{{ 'ExtendedPrivacy_CurrentTransparencyMode'|translate }}</strong>
+    {{ 'ExtendedPrivacy_DefaultPiwikTransparency'|translate }}
+</p>
+<div ng-controller="TransparencyController as TransparencyCtrl">
+    <h3>{{ 'ExtendedPrivacy_UserIsBeingTracked'|translate }}</h3>
+    <strong>{{ 'ExtendedPrivacy_ChangeCurrentTransparencyExplanation'|translate }}</strong>
+    <br/><br/>
+    <div class="row">
+        <textarea
+            maxlength="500"
+            ng-model="TransparencyCtrl.YouMayOptOut"
+            class="col s6 textarea">
+        </textarea>
+        <button class="col s3" piwik-save-button onconfirm="TransparencyCtrl.save('YouMayOptOut')"></button>
+        <div class="col s6 margin-y-10">
+            {% verbatim %}
+            {{ 500 - TransparencyCtrl.YouMayOptOut.length }}
+            {% endverbatim %}
+            {{ 'ExtendedPrivacy_CharacterCount'|translate }}
+        </div>
+    </div>
+    <div class="row">
+        <textarea
+            maxlength="500"
+            ng-model="TransparencyCtrl.YouMayOptOutBis"
+            class="col s6 textarea">
+        </textarea>
+        <button class="col s3" piwik-save-button onconfirm="TransparencyCtrl.save('YouMayOptOutBis')"></button>
+        <div class="col s6 margin-y-10">
+            {% verbatim %}
+            {{ 500 - TransparencyCtrl.YouMayOptOutBis.length }}
+            {% endverbatim %}
+            {{ 'ExtendedPrivacy_CharacterCount'|translate }}
+        </div>
+    </div>
+    <div class="row">
+        <textarea
+            maxlength="500"
+            ng-model="TransparencyCtrl.YouAreOptedIn"
+            class="col s6 textarea">
+        </textarea>
+        <button class="col s3 margin-y-10" piwik-save-button onconfirm="TransparencyCtrl.save('YouAreOptedIn')"></button>
+        <div class="col s6">
+            {% verbatim %}
+            {{ 500 - TransparencyCtrl.YouAreOptedIn.length }}
+            {% endverbatim %}
+            {{ 'ExtendedPrivacy_CharacterCount'|translate }}
+        </div>
+    </div>
+    <div class="row">
+        <textarea
+            maxlength="500"
+            ng-model="TransparencyCtrl.ClickHereToOptOut"
+            class="col s6 textarea">
+        </textarea>
+        <button class="col s3" piwik-save-button onconfirm="TransparencyCtrl.save('ClickHereToOptOut')"></button>
+        <div class="col s6 margin-y-10">
+            {% verbatim %}
+            {{ 500 - TransparencyCtrl.ClickHereToOptOut.length }}
+            {% endverbatim %}
+            {{ 'ExtendedPrivacy_CharacterCount'|translate }}
+        </div>
+    </div>
+    <h3>{{ 'ExtendedPrivacy_UserIsNotBeingTracked'|translate }}</h3>
+    <strong>{{ 'ExtendedPrivacy_ChangeCurrentTransparencyExplanation'|translate }}</strong>
+    <br/><br/>
+    <div class="row">
+        <textarea
+            maxlength="500"
+            ng-model="TransparencyCtrl.OptOutComplete"
+            class="col s6 textarea">
+        </textarea>
+        <button class="col s3" piwik-save-button onconfirm="TransparencyCtrl.save('OptOutComplete')"></button>
+        <div class="col s6 margin-y-10">
+            {% verbatim %}
+            {{ 500 - TransparencyCtrl.OptOutComplete.length }}
+            {% endverbatim %}
+            {{ 'ExtendedPrivacy_CharacterCount'|translate }}
+        </div>
+    </div>
+    <div class="row">
+        <textarea
+            maxlength="500"
+            ng-model="TransparencyCtrl.OptOutCompleteBis"
+            class="col s6 textarea">
+        </textarea>
+        <button class="col s3" piwik-save-button onconfirm="TransparencyCtrl.save('OptOutCompleteBis')"></button>
+        <div class="col s6 margin-y-10">
+            {% verbatim %}
+            {{ 500 - TransparencyCtrl.OptOutCompleteBis.length }}
+            {% endverbatim %}
+            {{ 'ExtendedPrivacy_CharacterCount'|translate }}
+        </div>
+    </div>
+    <div class="row">
+        <textarea
+            maxlength="500"
+            ng-model="TransparencyCtrl.YouAreOptedOut"
+            class="col s6 textarea">
+        </textarea>
+        <button class="col s3" piwik-save-button onconfirm="TransparencyCtrl.save('YouAreOptedOut')"></button>
+        <div class="col s6 margin-y-10">
+            {% verbatim %}
+            {{ 500 - TransparencyCtrl.YouAreOptedOut.length }}
+            {% endverbatim %}
+            {{ 'ExtendedPrivacy_CharacterCount'|translate }}
+        </div>
+    </div>
+    <div class="row">
+        <textarea
+            maxlength="500"
+            ng-model="TransparencyCtrl.ClickHereToOptIn"
+            class="col s6 textarea">
+        </textarea>
+        <button class="col s3" piwik-save-button onconfirm="TransparencyCtrl.save('ClickHereToOptIn')"></button>
+        <div class="col s6 margin-y-10">
+            {% verbatim %}
+            {{ 500 - TransparencyCtrl.ClickHereToOptIn.length }}
+            {% endverbatim %}
+            {{ 'ExtendedPrivacy_CharacterCount'|translate }}
+        </div>
+    </div>
+</div>

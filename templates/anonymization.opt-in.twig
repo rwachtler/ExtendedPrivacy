@@ -1,0 +1,35 @@
+<div piwik-content-block
+    id="optInAnchor"
+    content-title="{{ 'ExtendedPrivacy_OptInForYourVisitors'|translate|e('html_attr') }}">
+    <p>
+        {{ 'ExtendedPrivacy_OptInExplanation'|translate }}
+        {% set optInUrl %}{{ piwikUrl }}index.php?module=ExtendedPrivacy&action=optIn&language={{ language }}{% endset %}
+        {% set iframeOptIn %}<iframe style="border: 0; height: 200px; width: 600px;" src="{{ optInUrl }}"></iframe>{% endset %}
+        {% set piwikCodeOptIn %}
+<!-- Piwik -->
+<script type="text/javascript">
+const trackUsers = document.cookie.includes('piwik_track');
+if (trackUsers) {
+    var _paq = _paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function () {
+    var u = "//localhost/piwik-demo/piwik/piwik/";
+    _paq.push(['setTrackerUrl', u + 'piwik.php']);
+    _paq.push(['setSiteId', '1']);
+    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+    g.type = 'text/javascript'; g.async = true; g.defer = true; g.src = u + 'piwik.js'; s.parentNode.insertBefore(g, s);
+    })();
+}
+</script>
+<!-- End Piwik Code -->
+        {% endset %}
+    </p>
+    <pre piwik-select-on-focus>{{ iframeOptIn|e('html') }}</pre>
+    <p>
+        {{ 'ExtendedPrivacy_OptInExplanationBis'|translate("<a href='" ~ optInUrl ~ "' rel='noreferrer' target='_blank'>","</a>")|raw }}
+    </p>
+    <p>{{ 'ExtendedPrivacy_OptInExplanationStep2'|translate }}</p>
+    <pre piwik-select-on-focus>{{ piwikCodeOptIn|e('html') }}</pre>
+</div>

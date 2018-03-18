@@ -19,197 +19,27 @@
         </p>
      {% else %}
         {% if transparencyType == 'default' %}
-            <p>
-                <strong>{{ 'ExtendedPrivacy_CurrentTransparencyMode'|translate }}</strong>
-                {{ 'ExtendedPrivacy_DefaultPiwikTransparency'|translate }}
-            </p>
-            <div ng-controller="TransparencyController as TransparencyCtrl">
-                <strong>{{ 'ExtendedPrivacy_ChangeCurrentTransparencyExplanation'|translate }}</strong>
-                <br/><br/>
-                <div class="row">
-                    <textarea
-                        maxlength="500"
-                        ng-model="TransparencyCtrl.YouMayOptOut"
-                        class="col s6 textarea">
-                    </textarea>
-                    <button class="col s3" piwik-save-button onconfirm="TransparencyCtrl.save('YouMayOptOut')"></button>
-                    <div class="col s6 margin-y-10">
-                        {% verbatim %}
-                        {{ 500 - TransparencyCtrl.YouMayOptOut.length }}
-                        {% endverbatim %}
-                        {{ 'ExtendedPrivacy_CharacterCount'|translate }}
-                    </div>
-                </div>
-                <div class="row">
-                    <textarea
-                        maxlength="500"
-                        ng-model="TransparencyCtrl.YouMayOptOutBis"
-                        class="col s6 textarea">
-                    </textarea>
-                    <button class="col s3" piwik-save-button onconfirm="TransparencyCtrl.save('YouMayOptOutBis')"></button>
-                    <div class="col s6 margin-y-10">
-                        {% verbatim %}
-                        {{ 500 - TransparencyCtrl.YouMayOptOutBis.length }}
-                        {% endverbatim %}
-                        {{ 'ExtendedPrivacy_CharacterCount'|translate }}
-                    </div>
-                </div>
-                <div class="row">
-                    <textarea
-                        maxlength="500"
-                        ng-model="TransparencyCtrl.YouAreOptedIn"
-                        class="col s6 textarea">
-                    </textarea>
-                    <button class="col s3 margin-y-10" piwik-save-button onconfirm="TransparencyCtrl.save('YouAreOptedIn')"></button>
-                    <div class="col s6">
-                        {% verbatim %}
-                        {{ 500 - TransparencyCtrl.YouAreOptedIn.length }}
-                        {% endverbatim %}
-                        {{ 'ExtendedPrivacy_CharacterCount'|translate }}
-                    </div>
-                </div>
-                <div class="row">
-                    <textarea
-                        maxlength="500"
-                        ng-model="TransparencyCtrl.ClickHereToOptOut"
-                        class="col s6 textarea">
-                    </textarea>
-                    <button class="col s3" piwik-save-button onconfirm="TransparencyCtrl.save('ClickHereToOptOut')"></button>
-                    <div class="col s6 margin-y-10">
-                        {% verbatim %}
-                        {{ 500 - TransparencyCtrl.ClickHereToOptOut.length }}
-                        {% endverbatim %}
-                        {{ 'ExtendedPrivacy_CharacterCount'|translate }}
-                    </div>
-                </div>
-            </div>
+            {% include "@ExtendedPrivacy/transparency.opt-out.twig" %}
         {% endif %}
         {% if transparencyType == 'optIn' %}
-            <p>
-                <strong>{{ 'ExtendedPrivacy_CurrentTransparencyMode'|translate }}</strong>
-                {{ 'ExtendedPrivacy_OptInPiwikTransparency'|translate }}
-            </p>
+            {% include "@ExtendedPrivacy/transparency.opt-in.twig" %}
         {% endif %}
      {% endif %}
 </div>
 <div piwik-content-block
      id="anonymizationAnchor"
      content-title="{{ 'ExtendedPrivacy_Anonymization'|translate|e('html_attr') }}">
-     {% if anonymizeIPInUse %}
-        <strong>{{ 'ExtendedPrivacy_IPAnonymizationInUse'|translate }}</strong>
-        <br/>
-        <strong>Anzahl der maskierten Stellen: </strong>{{ anonymizeIPMaskLength }} (Bsp. <i>{{ anonymizeIPExamplePreview }}</i>)
-        <br/>
-        <strong>Geolokalisierung verwendet anonymisierte IP-Adresse: </strong>
-        {% if anonymizeIPForAnonymousVisitEnrichment == 0 %}
-            {{ 'General_No'|translate }}
-        {% else %}
-            {{ 'General_Yes'|translate }}
-        {% endif %}
-        <div>
-            <br/>
-            {{ 'ExtendedPrivacy_IPSettingsHint'|translate('<a href="index.php?module=PrivacyManager&action=privacySettings##anonymizeIPAnchor" target="_blank">','</a>')|raw }}
-        </div>
-        <div class="divider-v"></div>
-        <div piwik-content-block
-            id="optInAnchor"
-            content-title="{{ 'ExtendedPrivacy_OptInForYourVisitors'|translate|e('html_attr') }}">
-            <p>
-                {{ 'ExtendedPrivacy_OptInExplanation'|translate }}
-                {% set optInUrl %}{{ piwikUrl }}index.php?module=ExtendedPrivacy&action=optIn&language={{ language }}{% endset %}
-                {% set iframeOptIn %}<iframe style="border: 0; height: 200px; width: 600px;" src="{{ optInUrl }}"></iframe>{% endset %}
-                {% set piwikCodeOptIn %}
-<!-- Piwik -->
-    <script type="text/javascript">
-        const trackUsers = document.cookie.includes('piwik_track');
-        if (trackUsers) {
-            var _paq = _paq || [];
-            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-            _paq.push(['trackPageView']);
-            _paq.push(['enableLinkTracking']);
-            (function () {
-            var u = "//localhost/piwik-demo/piwik/piwik/";
-            _paq.push(['setTrackerUrl', u + 'piwik.php']);
-            _paq.push(['setSiteId', '1']);
-            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-            g.type = 'text/javascript'; g.async = true; g.defer = true; g.src = u + 'piwik.js'; s.parentNode.insertBefore(g, s);
-            })();
-        }
-    </script>
-<!-- End Piwik Code -->
-                {% endset %}
-            </p>
-            <pre piwik-select-on-focus>{{ iframeOptIn|e('html') }}</pre>
-            <p>
-                {{ 'ExtendedPrivacy_OptInExplanationBis'|translate("<a href='" ~ optInUrl ~ "' rel='noreferrer' target='_blank'>","</a>")|raw }}
-            </p>
-            <p>{{ 'ExtendedPrivacy_OptInExplanationStep2'|translate }}</p>
-            <pre piwik-select-on-focus>{{ piwikCodeOptIn|e('html') }}</pre>
-        </div>
-     {% endif %}
+    {% if anonymizeIPInUse %}
+        {% include "@ExtendedPrivacy/anonymization.ip.twig" %}
+    {% endif %}
+    <div class="divider-v"></div>
+    {% include "@ExtendedPrivacy/anonymization.opt-in.twig" %}
 </div>
 <div piwik-content-block
      id="dataAlterDeletionAnchor"
      content-title="{{ 'ExtendedPrivacy_DataDelete'|translate|e('html_attr') }}">
     <div id="extended-privacy-notifications"></div>
-    <div piwik-form ng-controller="AlterDeleteController as AlterDeleteCtrl">
-        <div piwik-notification
-            notificationId="extended-privacy-no-entries-found"
-            notification-title="{{ 'ExtendedPrivacy_Warning'|translate }}"
-            ng-show="AlterDeleteCtrl.performedRequest && !AlterDeleteCtrl.showDetails"
-            type="persistent"
-            noclear="true"
-            context="warning">
-                {{ 'ExtendedPrivacy_NoEntriesFound'|translate }}
-        </div>
-        <div piwik-notification
-            notificationId="extended-privacy-deletion-success"
-            notification-title="{{ 'ExtendedPrivacy_GenericSuccess'|translate }}"
-            ng-show="AlterDeleteCtrl.deletionSuccess"
-            type="persistent"
-            noclear="true"
-            context="success">
-                {{ 'ExtendedPrivacy_EntriesSuccessfullyDeleted'|translate }}
-        </div>
-        <div piwik-field uicontrol="text" name="piwikAlterDeleteVisitorID"
-            ng-model="AlterDeleteCtrl.id"
-            title="{{ 'ExtendedPrivacy_SearchForVisitorID'|translate }}"
-            value=""
-            piwik-onenter="AlterDeleteCtrl.getData()"
-            inline-help="{{ 'ExtendedPrivacy_SearchForVisitorIDInlineHelp'|translate }}">
-        </div>
-        <div ng-show="AlterDeleteCtrl.showDetails">
-            <div>
-                {{ 'ExtendedPrivacy_FoundEntries'|translate }}
-            </div>
-            <table class="simple-table">
-                <tr>
-                    <th>{{ 'ExtendedPrivacy_Table'|translate }}</th>
-                    <th>{{ 'ExtendedPrivacy_EntriesCount'|translate }}</th>
-                </tr>
-                {% verbatim %}
-                <tr ng-repeat="entry in AlterDeleteCtrl.entries">
-                    <td>{{ entry.tableName }}</td>
-                    <td>{{ entry.quantity }}</td>
-                </tr>
-                {% endverbatim %}
-            </table>
-            <br/>
-        </div>
-        <button
-            class="btn"
-            ng-click="AlterDeleteCtrl.deleteAllEntries()"
-            ng-disabled="(AlterDeleteCtrl.performedRequest && !AlterDeleteCtrl.showDetails) || !AlterDeleteCtrl.performedRequest"
-        >
-            {{ 'ExtendedPrivacy_DeleteAll'|translate }}
-        </button>
-        <span><i>{{ 'ExtendedPrivacy_NotRevertable'|translate }}</i></span>
-        <div id="confirmDeleteAllData" class="ui-confirm">
-            <h2 id="extendedPrivacyDeleteAllDataConfgirm">{{ 'ExtendedPrivacy_DeletionConfirm'|translate }}</h2>
-            <input role="yes" type="button" value="{{ 'General_Yes'|translate }}"/>
-            <input role="no" type="button" value="{{ 'General_No'|translate }}"/>
-        </div>
-     </div>
+    {% include "@ExtendedPrivacy/alter-delete.delete.twig" %}
 </div>
 {% endif %}
 {% endblock %}

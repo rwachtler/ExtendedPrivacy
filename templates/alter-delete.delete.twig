@@ -1,0 +1,58 @@
+<div piwik-form ng-controller="AlterDeleteController as AlterDeleteCtrl">
+<div piwik-notification
+    notificationId="extended-privacy-no-entries-found"
+    notification-title="{{ 'ExtendedPrivacy_Warning'|translate }}"
+    ng-show="AlterDeleteCtrl.performedRequest && !AlterDeleteCtrl.showDetails"
+    type="persistent"
+    noclear="true"
+    context="warning">
+        {{ 'ExtendedPrivacy_NoEntriesFound'|translate }}
+</div>
+<div piwik-notification
+    notificationId="extended-privacy-deletion-success"
+    notification-title="{{ 'ExtendedPrivacy_GenericSuccess'|translate }}"
+    ng-show="AlterDeleteCtrl.deletionSuccess"
+    type="persistent"
+    noclear="true"
+    context="success">
+        {{ 'ExtendedPrivacy_EntriesSuccessfullyDeleted'|translate }}
+</div>
+<div piwik-field uicontrol="text" name="piwikAlterDeleteVisitorID"
+    ng-model="AlterDeleteCtrl.id"
+    title="{{ 'ExtendedPrivacy_SearchForVisitorID'|translate }}"
+    value=""
+    piwik-onenter="AlterDeleteCtrl.getData()"
+    inline-help="{{ 'ExtendedPrivacy_SearchForVisitorIDInlineHelp'|translate }}">
+</div>
+<div ng-show="AlterDeleteCtrl.showDetails">
+    <div>
+        {{ 'ExtendedPrivacy_FoundEntries'|translate }}
+    </div>
+    <table class="simple-table">
+        <tr>
+            <th>{{ 'ExtendedPrivacy_Table'|translate }}</th>
+            <th>{{ 'ExtendedPrivacy_EntriesCount'|translate }}</th>
+        </tr>
+        {% verbatim %}
+        <tr ng-repeat="entry in AlterDeleteCtrl.entries">
+            <td>{{ entry.tableName }}</td>
+            <td>{{ entry.quantity }}</td>
+        </tr>
+        {% endverbatim %}
+    </table>
+    <br/>
+</div>
+<button
+    class="btn"
+    ng-click="AlterDeleteCtrl.deleteAllEntries()"
+    ng-disabled="(AlterDeleteCtrl.performedRequest && !AlterDeleteCtrl.showDetails) || !AlterDeleteCtrl.performedRequest"
+>
+    {{ 'ExtendedPrivacy_DeleteAll'|translate }}
+</button>
+<span><i>{{ 'ExtendedPrivacy_NotRevertable'|translate }}</i></span>
+<div id="confirmDeleteAllData" class="ui-confirm">
+    <h2 id="extendedPrivacyDeleteAllDataConfgirm">{{ 'ExtendedPrivacy_DeletionConfirm'|translate }}</h2>
+    <input role="yes" type="button" value="{{ 'General_Yes'|translate }}"/>
+    <input role="no" type="button" value="{{ 'General_No'|translate }}"/>
+</div>
+</div>

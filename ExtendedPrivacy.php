@@ -56,10 +56,16 @@ class ExtendedPrivacy extends \Piwik\Plugin
     public function getClientSideTranslationKeys(&$translationKeys) {
         $translationKeys[] = 'ExtendedPrivacy_GenericError';
         $translationKeys[] = 'ExtendedPrivacy_GenericSuccess';
+        $translationKeys[] = 'ExtendedPrivacy_OptedOut';
+        $translationKeys[] = 'ExtendedPrivacy_OptOutInfo';
         $translationKeys[] = 'CoreAdminHome_YouMayOptOut';
         $translationKeys[] = 'CoreAdminHome_YouAreOptedIn';
+        $translationKeys[] = 'CoreAdminHome_YouAreOptedOut';
         $translationKeys[] = 'CoreAdminHome_YouMayOptOutBis';
         $translationKeys[] = 'CoreAdminHome_ClickHereToOptOut';
+        $translationKeys[] = 'CoreAdminHome_ClickHereToOptIn';
+        $translationKeys[] = 'CoreAdminHome_OptOutComplete';
+        $translationKeys[] = 'CoreAdminHome_OptOutCompleteBis';
     }
 
 }

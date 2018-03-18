@@ -41,6 +41,8 @@
         "UrlPrivacyAlt": "privacy",
         "UrlTerms": "agb",
         "UrlLegal": "impressum",
+        "UserIsBeingTracked": "BenutzerIn wird getrackt",
+        "UserIsNotBeingTracked": "BenutzerIn wird nicht getrackt",
         "Warning": "Warnung"
     }
 }

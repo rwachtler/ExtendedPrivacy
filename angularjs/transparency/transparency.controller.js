@@ -16,10 +16,16 @@
         const UI = require('piwik/UI');
         this.showDetails = false;
         this.performedRequest = false;
-        this.YouMayOptOut = initTranslation('YouMayOptOut');
-        this.ClickHereToOptOut = initTranslation('ClickHereToOptOut');
-        this.YouMayOptOutBis = initTranslation('YouMayOptOutBis');
-        this.YouAreOptedIn = initTranslation('YouAreOptedIn');
+        this.YouMayOptOut = initTranslation('CoreAdminHome_YouMayOptOut');
+        this.ClickHereToOptOut = initTranslation('CoreAdminHome_ClickHereToOptOut');
+        this.ClickHereToOptIn = initTranslation('CoreAdminHome_ClickHereToOptIn');
+        this.YouMayOptOutBis = initTranslation('CoreAdminHome_YouMayOptOutBis');
+        this.YouAreOptedIn = initTranslation('CoreAdminHome_YouAreOptedIn');
+        this.YouAreOptedOut = initTranslation('CoreAdminHome_YouAreOptedOut');
+        this.OptOutComplete = initTranslation('CoreAdminHome_OptOutComplete');
+        this.OptOutCompleteBis = initTranslation('CoreAdminHome_OptOutCompleteBis');
+        this.OptedOut = initTranslation('ExtendedPrivacy_OptedOut');
+        this.OptOutInfo = initTranslation('ExtendedPrivacy_OptOutInfo');
 
         this.save = function (key) {
             TransparencyModel.createOrUpdateTranslation(key, self[key])
@@ -45,7 +51,7 @@
         }
 
         function initTranslation(key) {
-            return _pk_translate(`CoreAdminHome_${key}`);
+            return _pk_translate(key);
         }
     }
 })();
