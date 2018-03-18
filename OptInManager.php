@@ -38,6 +38,10 @@ class OptInManager
     /** @var array */
     private $queryParameters = array();
 
+    private $customTrackCookie;
+
+    private $customDoNotTrackCookie;
+
     /**
      * @param DoNotTrackHeaderChecker $doNotTrackHeaderChecker
      */
@@ -168,18 +172,25 @@ class OptInManager
             return $this->view;
         }
 
-        $optInCookie = new Cookie('piwik_opt-in');
-        $foundOptInCookie = $optInCookie->isCookieFound();
+        $this->customTrackCookie = new Cookie('piwik_track', null, '/');
+        $this->customDoNotTrackCookie = new Cookie('piwik_do-not-track', null, '/');
+        $foundCustomTrackCookie = $this->customTrackCookie->isCookieFound();
+        $foundCustomDoNotTrackCookie = $this->customDoNotTrackCookie->isCookieFound();
         $foundIgnoreCookie = IgnoreCookie::isIgnoreCookieFound();
         $dntFound = $this->getDoNotTrackHeaderChecker()->isDoNotTrackFound();
 
         $trackVisits = $foundIgnoreCookie ? false : true;
 
-        if (!$foundIgnoreCookie && !$foundOptInCookie) {
+        if (!$foundIgnoreCookie && !$foundCustomDoNotTrackCookie && !$foundCustomTrackCookie) {
             IgnoreCookie::setIgnoreCookie();
-            $optInCookie->set('opt-in', true);
-            $optInCookie->save();
+            $this->setCustomDoNotTrackCookie();
             $trackVisits = false;
+        } else if (!$foundIgnoreCookie && $foundCustomDoNotTrackCookie) {
+            $this->customDoNotTrackCookie->delete();
+            $this->setCustomTrackCookie();
+        } else if ($foundIgnoreCookie && $foundCustomTrackCookie) {
+            $this->customTrackCookie->delete();
+            $this->setCustomDoNotTrackCookie();
         }
 
         $setCookieInNewWindow = Common::getRequestVar('setCookieInNewWindow', false, 'int');
@@ -224,6 +235,16 @@ class OptInManager
         $this->view->queryParameters = $this->getQueryParameters();
 
         return $this->view;
+    }
+
+    private function setCustomTrackCookie() {
+        $this->customTrackCookie->set('piwik_track', 'true');
+        $this->customTrackCookie->save();
+    }
+
+    private function setCustomDoNotTrackCookie() {
+        $this->customDoNotTrackCookie->set('piwik_do-not-track', 'true');
+        $this->customDoNotTrackCookie->save();
     }
 
     /**
