@@ -98,7 +98,7 @@ class Controller extends \Piwik\Plugin\Controller
         }
         foreach ($iframesArr as $nodeList) {
             foreach ($nodeList as $iframeNode) {
-                $iframeTargetUrl = $iframeNode->attributes[1]->value;
+                $iframeTargetUrl = $this->getAttribute('src', $iframeNode->attributes);
                 if (strpos($iframeTargetUrl, 'module=CoreAdminHome&action=optOut')) {
                     $DOMInstance->loadHTMLFile($iframeTargetUrl);
                     $content = $DOMInstance->getElementsByTagName('body');
@@ -106,10 +106,25 @@ class Controller extends \Piwik\Plugin\Controller
                         'type' => 'default',
                         'content' => $content[0]->nodeValue
                     );
+                } else if (strpos($iframeTargetUrl, 'module=ExtendedPrivacy&action=optIn')) {
+                    $DOMInstance->loadHTMLFile($iframeTargetUrl);
+                    $content = $DOMInstance->getElementsByTagName('body');
+                    return array(
+                        'type' => 'optIn',
+                        'content' => $content[0]->nodeValue
+                    );
                 }
             }
         }
         return array();
+    }
+
+    private function getAttribute($name, $attributes) {
+        foreach ($attributes as $attribute) {
+            if ($attribute->name===$name) {
+                return $attribute->value;
+            }
+        }
     }
 
     protected function getAnonymizeIPInfo() {
