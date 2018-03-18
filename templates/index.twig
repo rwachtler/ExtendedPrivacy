@@ -106,6 +106,20 @@
             <br/>
             {{ 'ExtendedPrivacy_IPSettingsHint'|translate('<a href="index.php?module=PrivacyManager&action=privacySettings##anonymizeIPAnchor" target="_blank">','</a>')|raw }}
         </div>
+        <div class="divider-v"></div>
+        <div piwik-content-block
+            id="optInAnchor"
+            content-title="{{ 'ExtendedPrivacy_OptInForYourVisitors'|translate|e('html_attr') }}">
+            <p>
+                {{ 'ExtendedPrivacy_OptInExplanation'|translate }}
+                {% set optOutUrl %}{{ piwikUrl }}index.php?module=ExtendedPrivacy&action=optIn&language={{ language }}{% endset %}
+                {% set iframeOptOut %}<iframe style="border: 0; height: 200px; width: 600px;" src="{{ optOutUrl }}"></iframe>{% endset %}
+            </p>
+            <pre piwik-select-on-focus>{{ iframeOptOut|e('html') }}</pre>
+            <p>
+                {{ 'ExtendedPrivacy_OptInExplanationBis'|translate("<a href='" ~ optOutUrl ~ "' rel='noreferrer' target='_blank'>","</a>")|raw }}
+            </p>
+        </div>
      {% endif %}
 </div>
 <div piwik-content-block

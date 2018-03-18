@@ -23,6 +23,8 @@ class CustomTranslationLoader extends \Piwik\Translation\Loader\JsonFileLoader
         $ClickHereToOptOut = $this->getModel()->fetchTranslation('ClickHereToOptOut');
         $YouMayOptOutBis = $this->getModel()->fetchTranslation('YouMayOptOutBis');
         $YouAreOptedIn = $this->getModel()->fetchTranslation('YouAreOptedIn');
+        $OptedOut = $this->getModel()->fetchTranslation('OptedOut');
+        $OptOutInfo = $this->getModel()->fetchTranslation('OptOutInfo');
 
         if ($YouMayOptOut) {
             $translations['CoreAdminHome']['YouMayOptOut'] = $YouMayOptOut;
@@ -35,6 +37,12 @@ class CustomTranslationLoader extends \Piwik\Translation\Loader\JsonFileLoader
         }
         if ($YouAreOptedIn) {
             $translations['CoreAdminHome']['YouAreOptedIn'] = $YouAreOptedIn;
+        }
+        if ($OptedOut) {
+            $translations['ExtendedPrivacy']['OptedOut'] = $OptedOut;
+        }
+        if ($OptOutInfo) {
+            $translations['ExtendedPrivacy']['OptOutInfo'] = $OptOutInfo;
         }
 
         return $translations;

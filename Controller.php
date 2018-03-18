@@ -27,6 +27,15 @@ use Piwik\View;
  */
 class Controller extends \Piwik\Plugin\Controller
 {
+    /** @var OptInManager */
+    private $optInManager;
+
+    public function __construct(OptInManager $optInManager) {
+        $this->optInManager = $optInManager;
+
+        parent::__construct();
+    }
+
     public function extendedPrivacySettings() {
         Piwik::checkUserHasSomeAdminAccess();
         if (Piwik::hasUserSuperUserAccess()) {
@@ -42,10 +51,19 @@ class Controller extends \Piwik\Plugin\Controller
                 'anonymizeIPInUse' => $anonymizeIPInfo['enabled'],
                 'anonymizeIPMaskLength' => $anonymizeIPInfo['maskLength'],
                 'anonymizeIPForAnonymousVisitEnrichment' => $anonymizeIPInfo['useAnonymizedIpForVisitEnrichment'],
-                'anonymizeIPExamplePreview' => $anonymizeIPInfo['example']
+                'anonymizeIPExamplePreview' => $anonymizeIPInfo['example'],
+                'language' => LanguagesManager::getLanguageCodeForCurrentUser()
             );
         }
         return $this->renderTemplate('index', $viewData);
+    }
+
+    /**
+     * Shows the Opt-In checkbox.
+     */
+    public function optIn()
+    {
+        return $this->optInManager->getOptInView()->render();
     }
 
     /**
