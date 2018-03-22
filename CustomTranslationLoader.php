@@ -8,7 +8,8 @@
 
 namespace Piwik\Plugins\ExtendedPrivacy;
 
-use Piwik\Option;
+use Piwik\Config;
+use \Piwik\Plugins\ExtendedPrivacy\DBHelper;
 
 /**
  * Is used to override the default Opt-Out messages
@@ -19,6 +20,19 @@ class CustomTranslationLoader extends \Piwik\Translation\Loader\JsonFileLoader
     {
         $translations = parent::load($language, $directories);
 
+        if (Config::getInstance()->database['dbname'] === 'piwik_tests') {
+            $dbHelper = new DBHelper();
+            $dbHelper->createCustomTestingTable('translation_overrides');
+            $translations = $this->overrideOriginTranslationValues($translations);
+        } else {
+            $translations = $this->overrideOriginTranslationValues($translations);
+        }
+
+        return $translations;
+    }
+
+    private function overrideOriginTranslationValues($originTranslations) {
+        $translations = $originTranslations;
         $YouMayOptOut = $this->getModel()->fetchTranslation('YouMayOptOut');
         $ClickHereToOptOut = $this->getModel()->fetchTranslation('ClickHereToOptOut');
         $ClickHereToOptIn = $this->getModel()->fetchTranslation('ClickHereToOptIn');
