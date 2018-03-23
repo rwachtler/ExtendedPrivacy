@@ -9,7 +9,7 @@
 namespace Piwik\Plugins\ExtendedPrivacy;
 
 use Piwik\Piwik;
-use Piwik\Config;
+use Piwik\Common;
 use Piwik\Db;
 use \Exception;
 
@@ -20,10 +20,7 @@ class DBHelper {
      * @param string $tableName
      */
     public function createCustomTestingTable($tableName) {
-        $config = Config::getInstance();
-        $dbName = $config->database['dbname'];
-        $tablePrefix = $config->database['tables_prefix'];
-        $table = $dbName . '.' . $tablePrefix . $tableName;
+        $table = Common::prefixTable($tableName);;
 
         try {
             $sql = "CREATE TABLE " . $table . " (
