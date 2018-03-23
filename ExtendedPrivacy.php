@@ -46,18 +46,25 @@ class ExtendedPrivacy extends \Piwik\Plugin
         $files[] = "plugins/ExtendedPrivacy/angularjs/alter-delete/alter-delete.model.js";
         $files[] = "plugins/ExtendedPrivacy/angularjs/transparency/transparency.controller.js";
         $files[] = "plugins/ExtendedPrivacy/angularjs/transparency/transparency.model.js";
+        $files[] = "plugins/ExtendedPrivacy/angularjs/statute/statute.model.js";
+        $files[] = "plugins/ExtendedPrivacy/angularjs/statute/statute.controller.js";
+        $files[] = "plugins/ExtendedPrivacy/angularjs/statute/statute.directive.js";
     }
 
     public function getStylesheetFiles(&$files) {
         $files[] = "plugins/ExtendedPrivacy/stylesheets/main.less";
         $files[] = "plugins/ExtendedPrivacy/stylesheets/utils.less";
+        $files[] = "plugins/ExtendedPrivacy/angularjs/statute/statute.directive.less";
     }
 
     public function getClientSideTranslationKeys(&$translationKeys) {
+        $translationKeys[] = 'ExtendedPrivacy_DataPrivacyAct';
         $translationKeys[] = 'ExtendedPrivacy_GenericError';
         $translationKeys[] = 'ExtendedPrivacy_GenericSuccess';
         $translationKeys[] = 'ExtendedPrivacy_OptedOut';
         $translationKeys[] = 'ExtendedPrivacy_OptOutInfo';
+        $translationKeys[] = 'ExtendedPrivacy_SectionType';
+        $translationKeys[] = 'ExtendedPrivacy_StatuteSource';
         $translationKeys[] = 'CoreAdminHome_YouMayOptOut';
         $translationKeys[] = 'CoreAdminHome_YouAreOptedIn';
         $translationKeys[] = 'CoreAdminHome_YouAreOptedOut';

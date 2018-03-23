@@ -12,6 +12,7 @@
 <div piwik-content-block
      id="transparencyAnchor"
      content-title="{{ 'ExtendedPrivacy_Transparency'|translate|e('html_attr') }}">
+     <div extended-privacy-statute source="{{ 'ExtendedPrivacy_StatuteSourceTransparency'|translate|e('html_attr') }}"></div>
      <div id="extended-privacy-notifications-transparency"></div>
      {% if transparencyType == false %}
         <p>
@@ -29,6 +30,7 @@
 <div piwik-content-block
      id="anonymizationAnchor"
      content-title="{{ 'ExtendedPrivacy_Anonymization'|translate|e('html_attr') }}">
+    <div extended-privacy-statute source="{{ 'ExtendedPrivacy_StatuteSourceAnonymization'|translate|e('html_attr') }}"></div>
     {% if anonymizeIPInUse %}
         {% include "@ExtendedPrivacy/anonymization.ip.twig" %}
     {% endif %}
@@ -38,6 +40,7 @@
 <div piwik-content-block
      id="dataAlterDeletionAnchor"
      content-title="{{ 'ExtendedPrivacy_DataDelete'|translate|e('html_attr') }}">
+    <div extended-privacy-statute source="{{ 'ExtendedPrivacy_StatuteSourceAlterDelete'|translate|e('html_attr') }}"></div>
     <div id="extended-privacy-notifications"></div>
     {% include "@ExtendedPrivacy/alter-delete.delete.twig" %}
 </div>
